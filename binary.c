@@ -1,39 +1,35 @@
-# Repo1
-#include <stdio.h>
- 
-int main()
-{
-   int c, first, last, middle, n, search, array[100];
- 
-   printf("Enter number of elements\n");
-   scanf("%d",&n);
- 
-   printf("Enter %d integers\n", n);
- 
-   for (c = 0; c < n; c++)
-      scanf("%d",&array[c]);
- 
-   printf("Enter value to find\n");
-   scanf("%d", &search);
- 
-   first = 0;
-   last = n - 1;
-   middle = (first+last)/2;
- 
-   while (first <= last) {
-      if (array[middle] < search)
-         first = middle + 1;    
-      else if (array[middle] == search) {
-         printf("%d found at location %d.\n", search, middle+1);
+int main() {
+    int arr_search[MAX_SIZE], i,element;
+
+    printf("Simple Binary Search Example - Array and Functions\n");
+    printf("\nEnter %d Elements for Searching : \n", MAX_SIZE);
+    for (i = 0; i < MAX_SIZE; i++)
+        scanf("%d", &arr_search[i]);
+
+	printf("Enter Element to Search : ");
+    scanf("%d", &element);
+   
+
+    binary_search(arr_search,element);
+    getch();
+}
+
+void binary_search(int fn_arr[],int element) {
+   int f = 0, r = MAX_SIZE,mid;
+   
+   while (f <= r) {
+	  mid = (f+r)/2;
+
+	  if (fn_arr[mid] == element) {
+         printf("\nSearch Element  : %d  : Found :  Position : %d.\n", element, mid+1);
          break;
-      }
+	  }
+      else if (fn_arr[mid] < element)
+         f = mid + 1;    
       else
-         last = middle - 1;
- 
-      middle = (first + last)/2;
+         r = mid - 1;
    }
-   if (first > last)
-      printf("Not found! %d isn't present in the list.\n", search);
- 
-   return 0;  
+   
+   if (f > r)
+      printf("\nSearch Element : %d  : Not Found \n", element);
 }
